@@ -1,1 +1,73 @@
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>MT GENERAIS | Central de Operações</title>
+<style>
+:root{--gold:#e7b832;--bg:#101010;--panel:#1b1b1b;--line:#383838;--muted:#aaa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{padding:23px 18px;background:#080808;border-bottom:2px solid var(--gold)}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px;color:var(--gold)}.sub{font-size:11px;letter-spacing:3px;color:#aaa;margin-top:5px}
+nav{display:flex;gap:7px;padding:11px;overflow:auto;background:#151515}
+nav button,.btn{border:1px solid #555;border-radius:7px;padding:11px 13px;background:#252525;color:white;white-space:nowrap}
+nav button.active,.btn.gold{background:var(--gold);color:#111;border-color:var(--gold);font-weight:bold}
+main{max-width:900px;margin:auto;padding:17px}.tab{display:none}.tab.active{display:block}
+.hero{padding:25px 20px;margin:8px 0 18px;border:1px solid #70551a;border-radius:13px;background:linear-gradient(135deg,#30240b,#111 72%)}
+.hero h1{font-size:30px;color:var(--gold);margin:9px 0}.tag{color:var(--gold);font-size:12px;letter-spacing:1px}
+p{line-height:1.5}.muted{color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:15px 0}
+.stat,.panel{padding:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px}
+.stat strong{display:block;color:var(--gold);font-size:23px}.stat span{font-size:11px;color:#aaa}
+h2{font-size:21px;color:var(--gold)}h3{font-size:16px}
+input,select{display:block;width:100%;padding:12px;margin:7px 0 13px;border-radius:7px;border:1px solid #555;background:#101010;color:#fff}
+label{font-size:13px;color:#ddd}button{cursor:pointer}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 7px;border-bottom:1px solid var(--line)}th{color:var(--gold)}
+.table-wrap{overflow-x:auto}.notice{padding:11px;border-left:3px solid var(--gold);background:#242014;color:#ddd;font-size:13px}
+footer{text-align:center;padding:25px;color:#888;font-size:12px}
+</style>
+</head>
+<body>
+<header><div class="logo">MT GENERAIS</div><div class="sub">CENTRAL DE OPERAÇÕES</div></header>
+<nav>
+<button class="active" data-tab="inicio">INÍCIO</button>
+<button data-tab="ranking">RANKING</button>
+<button data-tab="lines">LINES</button>
+<button data-tab="campeonatos">CAMPEONATOS</button>
+<button data-tab="recrutamento">RECRUTAMENTO</button>
+<button data-tab="admin">ADMIN</button>
+</nav>
+<main>
+<section id="inicio" class="tab active">
+<div class="hero"><span class="tag">GUILDA COMPETITIVA • FREE FIRE</span><h1>MT GENERAIS</h1><p>Disciplina, estratégia e vitória. Bem-vindo à central de organização da nossa guilda.</p><button class="btn gold" data-go="ranking">VER CLASSIFICAÇÃO</button></div>
+<div class="stats"><div class="stat"><strong id="statLines">0</strong><span>LINES</span></div><div class="stat"><strong id="statTeams">0</strong><span>EQUIPES</span></div><div class="stat"><strong id="statKills">0</strong><span>KILLS</span></div></div>
+<div class="panel"><h2>Bem-vindo, Generais!</h2><p class="muted">Acompanhe os resultados, conheça nossas equipes e participe dos próximos campeonatos.</p></div>
+</section>
+<section id="ranking" class="tab"><h2>🏆 RANKING GERAL</h2><p class="muted">Classificação de demonstração, atualizada com os resultados inseridos neste navegador.</p><div class="panel table-wrap"><table><thead><tr><th>#</th><th>Equipe</th><th>Pontos</th><th>Kills</th></tr></thead><tbody id="rankingRows"><tr><td colspan="4">Nenhuma equipe cadastrada.</td></tr></tbody></table></div></section>
+<section id="lines" class="tab"><h2>👥 LINES</h2><div id="lineList" class="panel muted">Nenhuma equipe cadastrada ainda.</div></section>
+<section id="campeonatos" class="tab"><h2>⚔️ CAMPEONATOS</h2><div class="panel"><p>Área de campeonatos MT GENERAIS.</p><p class="muted">A criação de campeonatos, inscrição de equipes e gestão de rodadas será adicionada na próxima etapa.</p><span class="tag">MÓDULO EM CONSTRUÇÃO</span></div></section>
+<section id="recrutamento" class="tab"><h2>📋 RECRUTAMENTO</h2><div class="panel"><p>Quer fazer parte da MT GENERAIS?</p><form id="recruitForm"><label>Nick no Free Fire</label><input id="nick" required placeholder="Seu nick"><label>ID do jogo (opcional)</label><input id="gameid" placeholder="Seu ID"><label>Função</label><select id="role"><option>Rush</option><option>Suporte</option><option>Fixo</option><option>Capitão</option></select><label>Contato (opcional)</label><input id="contact" placeholder="WhatsApp ou Discord"><button class="btn gold">ENVIAR INSCRIÇÃO</button></form><p id="recruitMsg" class="muted"></p></div></section>
+<section id="admin" class="tab"><h2>⚙️ PAINEL DE TESTE</h2><div class="notice">Esta primeira versão é apenas uma prévia: os dados ficam salvos neste navegador. Ainda não existe login seguro nem banco de dados online. Não use dados pessoais reais.</div>
+<div class="panel"><h3>Cadastrar equipe</h3><form id="teamForm"><label>Nome da equipe/line</label><input id="teamName" required placeholder="Ex.: MT TITANS"><button class="btn gold">CADASTRAR EQUIPE</button></form>
+<h3>Lançar resultado de teste</h3><label>Equipe</label><select id="teamSelect"></select><label>Pontos</label><input id="points" type="number" min="0" step="1" value="0"><label>Kills</label><input id="kills" type="number" min="0" step="1" value="0"><button class="btn gold" id="resultBtn">SOMAR RESULTADO</button><p id="adminMsg" class="muted"></p></div>
+</section>
+</main>
+<footer>MT GENERAIS © 2026 • CENTRAL DE OPERAÇÕES</footer>
+<script>
+const KEY='mt_generais_demo_teams';
+let teams=[];
+try{teams=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){teams=[]}
+function save(){localStorage.setItem(KEY,JSON.stringify(teams));render()}
+function showTab(id){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id))}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.go)));
+document.getElementById('teamForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('teamName').value.trim();if(!name)return;if(teams.some(t=>t.name.toLowerCase()===name.toLowerCase())){document.getElementById('adminMsg').textContent='Essa equipe já existe.';return}teams.push({name,points:0,kills:0});document.getElementById('teamName').value='';document.getElementById('adminMsg').textContent='Equipe adicionada nesta prévia.';save()});
+document.getElementById('resultBtn').addEventListener('click',()=>{const idx=document.getElementById('teamSelect').value;const p=Number(document.getElementById('points').value);const k=Number(document.getElementById('kills').value);if(idx===''||!teams[idx]){document.getElementById('adminMsg').textContent='Cadastre uma equipe primeiro.';return}if(p<0||k<0||!Number.isInteger(p)||!Number.isInteger(k)){document.getElementById('adminMsg').textContent='Informe números inteiros válidos.';return}teams[idx].points+=p;teams[idx].kills+=k;document.getElementById('adminMsg').textContent='Resultado somado na prévia.';save()});
+document.getElementById('recruitForm').addEventListener('submit',e=>{e.preventDefault();document.getElementById('recruitMsg').textContent='Prévia: formulário demonstrativo. O envio online será ativado após configurar o banco de dados.';e.target.reset()});
+function render(){const sorted=[...teams].sort((a,b)=>b.points-a.points||b.kills-a.kills);document.getElementById('rankingRows').innerHTML=sorted.length?sorted.map((t,i)=>`<tr><td>${i+1}</td><td>${escapeHtml(t.name)}</td><td>${t.points}</td><td>${t.kills}</td></tr>`).join(''):'<tr><td colspan="4">Nenhuma equipe cadastrada.</td></tr>';document.getElementById('lineList').innerHTML=teams.length?teams.map(t=>`<p><b>${escapeHtml(t.name)}</b> <span class="muted">• ${t.points} pontos • ${t.kills} kills</span></p>`).join(''):'Nenhuma equipe cadastrada ainda.';document.getElementById('teamSelect').innerHTML=teams.map((t,i)=>`<option value="${i}">${escapeHtml(t.name)}</option>`).join('');document.getElementById('statLines').textContent=teams.length;document.getElementById('statTeams').textContent=teams.length;document.getElementById('statKills').textContent=teams.reduce((s,t)=>s+t.kills,0)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+render();
+</script>
+</body>
+</html>
